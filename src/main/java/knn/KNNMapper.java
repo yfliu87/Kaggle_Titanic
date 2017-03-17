@@ -2,6 +2,7 @@ package knn;
 
 import dataStructure.FeatureLabel;
 import dataStructure.Record;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -23,11 +24,12 @@ public class KNNMapper extends Mapper<Object, Text, Text, Text> {
 
     @Override
     public void setup(Context context) throws IOException {
-        FileSystem fs = FileSystem.get(context.getConfiguration());
+        Configuration conf = context.getConfiguration();
+        FileSystem fs = FileSystem.get(conf);
 
         try {
             BufferedReader bReader = new BufferedReader(new InputStreamReader(
-                    fs.open(new Path(context.getConfiguration().get("trainingPath")))));
+                    fs.open(new Path(conf.get("trainingPath")))));
 
             String line = bReader.readLine();   // skip column line
             while((line = bReader.readLine()) != null) {

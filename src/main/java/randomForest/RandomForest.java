@@ -25,6 +25,10 @@ public class RandomForest {
         treeAccuracy = new LinkedList<>();
     }
 
+    /**
+     * Rebuild decision trees from JSON
+     * @param json
+     */
     public void restore(String json) {
         Gson gs = new Gson();
         String[] treeJsons = json.split(";");
@@ -42,6 +46,11 @@ public class RandomForest {
         }
     }
 
+    /**
+     * Predict the survival state of the given people
+     * @param rec
+     * @return
+     */
     public String predict(Record rec) {
         Map<String, Integer> prediction = new HashMap<>();
 

@@ -14,11 +14,9 @@ public class Record {
 
     // User defined skipped features
     private List<Integer> skipFeatures = new LinkedList<Integer>(){{
-        //add(FeatureLabel.getFeatureIndex("SibSp"));
-        //add(FeatureLabel.getFeatureIndex("Parch"));
         add(FeatureLabel.getFeatureIndex("Ticket"));
         add(FeatureLabel.getFeatureIndex("Cabin"));
-        //add(FeatureLabel.getFeatureIndex("Embarked"));
+        add(FeatureLabel.getFeatureIndex("Embarked"));
     }};
 
     public Record() {}
@@ -66,6 +64,11 @@ public class Record {
         this.features.add(value);
     }
 
+    /**
+     * Remove a specific feature value from current record
+     * @param featureIndex
+     * @return
+     */
     public Record removeFeatureByIndex(int featureIndex) {
         List<Integer> indexes = this.getFeatureIndexes();
         indexes.remove(new Integer(featureIndex));

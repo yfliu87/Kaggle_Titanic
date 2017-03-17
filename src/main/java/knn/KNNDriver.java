@@ -10,8 +10,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static util.Calculator.calculateMetrics;
 
@@ -24,18 +23,17 @@ public class KNNDriver {
 
     public static int run(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
-        Configuration conf = new Configuration();
-        conf.set("mapreduce.output.textoutputformat.separator", ",");
-
         Path trainingPath = new Path(args[1]);
         Path testPath = new Path(args[2]);
         Path referencePath = new Path(args[4]);
         String[] kSizes = args[5].split(",");
 
+        Configuration conf = new Configuration();
+        conf.set("mapreduce.output.textoutputformat.separator", ",");
+
         for (FileStatus fs : FileSystem.get(conf).listStatus(trainingPath)) {
             conf.set("trainingPath", fs.getPath().toString());
 
-            // grid search to find optimal k
             for (String size : kSizes) {
 
                 System.out.println("\n=============================");

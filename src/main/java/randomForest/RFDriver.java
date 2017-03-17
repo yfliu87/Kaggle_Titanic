@@ -33,7 +33,6 @@ public class RFDriver {
         int jobCode = 0;
         Map<String, String> metrics = new HashMap<>();
 
-        // grid search according to given tree numbers
         for (String treeNum : treeNums) {
 
             System.out.println("\n=======================================");
@@ -41,6 +40,8 @@ public class RFDriver {
             System.out.println("=======================================");
 
             Configuration conf = new Configuration();
+            conf.set("mapreduce.output.textoutputformat.separator", ",");
+
             Path modelPath = new Path(args[3] + "/Model_" + treeNum + "_trees");
 
             splitData(conf, trainingPath.toString(), inputPath.toString(), Integer.parseInt(treeNum));

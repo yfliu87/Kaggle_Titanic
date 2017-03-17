@@ -1,5 +1,6 @@
 package util;
 
+import dataStructure.FeatureLabel;
 import dataStructure.Record;
 import dataStructure.RecordTable;
 import org.apache.hadoop.conf.Configuration;
@@ -27,6 +28,9 @@ public class Calculator {
         double sum = 0.0;
         // Calculate similarity using features not skipped
         for (int i : r1.getFeatureIndexes()) {
+            if (FeatureLabel.getFeatureIndex(FeatureLabel.PASSENGERID) == i)
+                continue;
+
             sum += diffSquare(r1.getFeature(i), r2.getFeature(i));
         }
         return Math.sqrt(sum);
@@ -50,7 +54,7 @@ public class Calculator {
 
     /**
      * Calculate entropy of multiclass labels
-     * @param counts <flower type, counts>
+     * @param counts < Survived/Not Survived, counts >
      * @return entropy of multiclass labels
      */
     public static double entropy(Map<Integer,Integer> counts) {

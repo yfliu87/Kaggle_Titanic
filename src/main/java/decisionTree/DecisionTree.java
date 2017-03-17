@@ -17,7 +17,11 @@ public class DecisionTree {
         root = buildTree(table);
     }
 
-    //build decision tree from training data
+    /**
+     * Build decision tree from record table
+     * @param table
+     * @return
+     */
     public static DecisionTree fit(RecordTable table) {
         return new DecisionTree(table);
     }
@@ -136,6 +140,12 @@ public class DecisionTree {
         return sb.toString();
     }
 
+    /**
+     * Recursively search for tree node that matches with record
+     * @param root
+     * @param rec
+     * @param sb
+     */
     private void match(TreeNode root, Record rec, StringBuilder sb) {
         if (root.getLeft() == null && root.getRight() == null)
             sb.append(root.getLabel());

@@ -14,6 +14,14 @@ import java.util.List;
  */
 public class DataOrganizer {
 
+    /**
+     * Randomly split the raw data according to user input tree numbers
+     * @param conf
+     * @param trainingPath
+     * @param inputPath
+     * @param treeNum
+     * @throws IOException
+     */
     public static void splitData(Configuration conf, String trainingPath, String inputPath, int treeNum) throws IOException {
 
         List<String> rawData = readRawData(conf, trainingPath);
@@ -41,6 +49,13 @@ public class DataOrganizer {
         }
     }
 
+    /**
+     * Read raw data from HDFS and store it in a list
+     * @param conf
+     * @param inputPath
+     * @return list of lines in the raw data
+     * @throws IOException
+     */
     public static List<String> readRawData(Configuration conf, String inputPath) throws IOException {
         List<String> ret = new LinkedList<>();
         FileSystem fs = FileSystem.get(conf);

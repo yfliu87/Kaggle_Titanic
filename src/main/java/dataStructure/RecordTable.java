@@ -21,34 +21,23 @@ public class RecordTable {
         return this.records.size();
     }
 
+    /**
+     * Retrieve a record by its index
+     * @param index
+     * @return
+     */
     public Record getRecord(int index) {
         assert(index < records.size());
 
         return this.records.get(index);
     }
 
+    /**
+     * Add a record to current record table
+     * @param rec
+     */
     public void addRecord(Record rec) {
         this.records.add(rec);
-    }
-
-    public void shuffle() {
-        Collections.shuffle(records);
-    }
-
-    public RecordTable[] randomSelectSubset(double percentage) {
-        int threshold = (int) (10 * percentage);
-        Random rand = new Random();
-
-        List<Record> train = new LinkedList<>();
-        List<Record> test = new LinkedList<>();
-
-        for (int i = 0; i < this.size(); i++) {
-            if (rand.nextInt(10) < threshold)
-                train.add(this.getRecord(i));
-            else
-                test.add(this.getRecord(i));
-        }
-        return new RecordTable[]{new RecordTable(train), new RecordTable(test)};
     }
 
     /**
